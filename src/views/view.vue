@@ -4,6 +4,7 @@
         <div class="writer">{{ board.writer }}</div>
         <div class="write-date">{{ board.writeDate }}</div>
         <div class="content">{{ board.content }}</div>
+        <div clsss="view-count">조회수 : {{ board.viewCount }} </div>
         <v-layout>
             <v-btn color="primary" @click="moveList">목록</v-btn>
             <v-spacer></v-spacer>
@@ -15,6 +16,8 @@
 
 <script>
 
+import moment from 'moment';
+
 export default {
     data() {
         return {
@@ -22,18 +25,23 @@ export default {
                 title: "",
                 writer: "",
                 writeDate: "",
-                content: ""
+                content: "",
+                viewCount: 0
             }
         }
     },
     mounted() {
         var no = this.$route.params.id;
         this.$axios.get("/board/" + no)
-        .then(response => {
-            this.board = response.data
-        })
+            .then(response => {
+                this.board = response.data
+                this.board.writeDate = this.formattedDate(this.board.writeDate)
+            })
     },
     methods: {
+        formattedDate(date) {
+            return moment(date).format("yyyy-MM-DD HH:mm:ss")
+        },
         moveModify() {
             this.$router.push("/modify/" + this.$route.params.id)
         },

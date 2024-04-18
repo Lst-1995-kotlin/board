@@ -3,6 +3,8 @@ import list from"@/views/list.vue"
 import write from "@/views/write.vue"
 import view from "@/views/view.vue"
 import modify from "@/views/modify.vue"
+import join from "@/views/join.vue"
+import login from "@/views/login.vue"
 
 const routes = [
   {
@@ -20,6 +22,14 @@ const routes = [
   {
     path: "/modify/:id",
     component: modify
+  },
+  {
+    path: "/join",
+    component: join
+  },
+  {
+    path: "/login",
+    component: login
   }
 ]
 

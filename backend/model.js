@@ -24,6 +24,29 @@ function model(Sequelize,connection){
         defaultValue: Sequelize.NOW
     }
     })
+
+    connection.define("user", {
+        no: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        id: {
+            type: Sequelize.STRING,
+            unique: true
+        },
+        password: {
+            type: Sequelize.STRING
+        },
+        name: {
+            type: Sequelize.STRING
+        },
+        joinDate: {
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW
+        }
+    })
+
     connection.sync({
         alter: true
     })
