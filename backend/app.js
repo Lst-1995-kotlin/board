@@ -26,6 +26,28 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+
+const options = {
+	host: 'localhost',
+	port: 3306,
+	user: 'root',
+	password: 'korea1995@',
+	database: 'board'
+};
+
+const sessionStore = new MySQLStore(options);
+
+app.use(session({
+	key: 'session_id',
+	secret: 'session_cookie_secret',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

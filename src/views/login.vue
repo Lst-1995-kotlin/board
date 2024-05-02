@@ -26,6 +26,7 @@
             this.$axios.post("/user/login", this.user)
             .then(response => {
                     if (response.data.result=="success") {
+                        this.$store.commit("setLoginUser",response.data.user)
                         alert("로그인되었습니다.")
                         this.$router.push("/")
                         return
